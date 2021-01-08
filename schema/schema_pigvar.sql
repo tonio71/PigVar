@@ -1,1 +1,0 @@
-CREATE SCHEMA `sigvar` DEFAULT CHARACTER SET utf8 COLLATE utf8_swedish_ci ;
