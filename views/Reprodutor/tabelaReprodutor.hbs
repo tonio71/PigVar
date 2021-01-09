@@ -4,25 +4,57 @@
   
 {{/each}}
 
-<h1>Página de Categorias </h1>
+<h2>Tabela de Reprodutor </h2>
 
 <a href='/admin/categorias/add'> 
-    <button class="btn btn-success">Criar nova Categoria</button>
+    <button class="btn btn-success">Cadastrar novo Reprodutor</button>
 </a>
+			<section class="container">
+				<label for="filtrar-tabela">Filtrar:
+							<input type="text" name="filtro" id="filtrar-tabela" placeholder="Digite o nome do paciente">
+				</label>
+				<table>
+					<thead>
+						<tr>
+							<th>Brinco</th>
+							<th>Multiplicadora</th>
+							<th>Genética</th>
+							<th>Nascimento</th>
+							<th>Peso ao Nascer</th>
+							<th>chegada</th>
+							<th>Peso ao Chegar</th> 
+							<th>Sexo</th>
+							<th>Operacoes</th>
+						</tr>
+					</thead>
+					
+					<tbody id="tabela-reprodutores">
+					    {{#each reprodutores}}
 
-{{#each categorias}}
-    <div class= "card mt-4">
-        <div class= "card-body">
-            <h4> {{dataValues.nome}} </h4>
-            <small>Slug:  {{dataValues.slug}}</small> <br>
-            <small>Data de criação:  {{dataValues.date}}</small> <br> <br>
-            <a href ='/admin/categorias/altCategoria/{{dataValues.id}}'> 
-                <button class='btn btn-success mt-3'> alterar </button> </a>
-            <a href ='/admin/categorias/excCategoria/{{dataValues.id}}'> 
-                <button class='btn btn-danger mt-3'> deletar </button> </a>
-        </div>
-    </div>
+						<tr class="reprodutor">
+							<td class="info-brinco">{{brinco}}</td>
+							<td class="info-multiplicadora">{{multiplicadora}}</td>
+							<td class="info-genetica">{{genetica}}</td>
+							<td class="info-data_nasc">{{data_nasc}}</td>
+							<td class="info-peso_nasc">{{peso_nasc}}</td>
+							<td class="info-data_chegada">{{data_chegada}}</td>
+							<td class="info-peso_chegada">{{peso_chegada}}</td>
+							<td class="info-sexo">{{sexo}}</td>
+							<td class="info-operacoes">
+								<a href ='/admin/categorias/altCategoria/{{dataValues.id}}'> 
+										<button class='btn btn-success mt-3'> alterar </button> </a>
+								<a href ='/admin/categorias/excCategoria/{{dataValues.id}}'> 
+										<button class='btn btn-danger mt-3'> deletar </button> </a>
 
-{{else}}
-    <h4 class="mt-4">Nenhuma categoria registrada !</h4>
+							</td>
+						</tr>
+						
+{{else}}						
+		
+
+
+    <h4 class="mt-4">Nenhum reprodutor registrado !</h4>
 {{/each}}
+</tbody>
+</table>
+</section>

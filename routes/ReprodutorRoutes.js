@@ -13,6 +13,7 @@ const ReprodutorController = require ('../controllers/ReprodutorController')
 //Rotas da Entidade
 //router.get('/categorias',  eAdmin, CategoriaController.listarCategorias)
 
+router.get('/',  ReprodutorController.tabelaReprodutor)
 router.get('/listarReprodutor',  ReprodutorController.tabelaReprodutor)
 router.get('/formCadReprodutor', ReprodutorController.formCadReprodutor)
 router.get('/formAltReprodutor/:id', ReprodutorController.formAltReprodutor)

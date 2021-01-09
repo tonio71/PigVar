@@ -2,12 +2,32 @@
 // Template para criação de controller de Entidades
 //
 
-const modelReprodutor = require ('../models/Reprodutor')
+const Banco = require ('../models/BD')
+const mysql = require('mysql2');
+//const modelReprodutor = require ('../models/Reprodutor')
 
 class ReprodutorController {
 
-	listarReprodutor(req,res){  
-        modelReprodutor.findAll(
+	tabelaReprodutor(req,res){
+		console.log("tabela reprodutor")
+		Banco.query(
+			'SELECT * FROM `reprodutor`',
+			[],
+			function(err, reprodutores, fields) {
+				if(!err){
+					console.log(reprodutores[2].TextRow);
+					res.render('Reprodutor/tabelaReprodutor', {reprodutores: reprodutores})
+					//console.log("RESULTADOS: ",results); // results contains rows returned by server
+				}
+				else{
+					console.log("Erro: ", err);
+				}
+			}
+		);
+	
+	
+	
+       /* modelReprodutor.findAll(
             {  order: [['date', 'DESC']] }
         )
         .then( function(arrayReprodutor){
@@ -16,7 +36,7 @@ class ReprodutorController {
         .catch( function(erro){
             req.flash('error_msg', 'Erro na consulta'+erro)
             res.redirect('/')
-        })
+        })*/
     }
 
     formCadReprodutor ( req , res ){
@@ -24,7 +44,7 @@ class ReprodutorController {
     }
 
     formAltReprodutor ( req , res ){
-        modelReprodutor.findOne(
+        /*modelReprodutor.findOne(
             {  where: {id:req.params.id} }
         )
         .then( function(umReprodutor){
@@ -34,7 +54,7 @@ class ReprodutorController {
         .catch( function(erro){
             req.flash('error_msg', 'Erro na consulta'+erro)
             res.redirect('/Reprodutor/listarReprodutor')
-        })
+        })*/
     }
 
     async addAltReprodutor ( req , res ){
@@ -51,7 +71,7 @@ class ReprodutorController {
 				nome: req.body.nome,
                 slug: req.body.slug
             }
-            if (req.body.id.length == 0){
+            /*if (req.body.id.length == 0){
                 modelReprodutor.create(novoReprodutor)
                 .then( function(item){
 					req.flash('success_msg', 'Cadastrado com sucesso!!!')
@@ -72,12 +92,12 @@ class ReprodutorController {
                     req.flash('error_msg', 'Erro!!! Não foi possível alterar. ' + erro)
                     res.redirect('/Reprodutor/listarReprodutor')
                 })
-            }
+            }*/
         }
     }
 	
 	excReprodutor(req, res){
-        modelReprodutor.destroy({where: {'id' : req.params.id}})
+        /*modelReprodutor.destroy({where: {'id' : req.params.id}})
         .then( function(){
             req.flash('success_msg', 'Exclusão efetuada com sucesso!!!')
             res.redirect('/Reprodutor/listarReprodutor')
@@ -85,7 +105,7 @@ class ReprodutorController {
         .catch( function(erro){
             req.flash('error_msg', 'Erro!!! Não foi possível excluir. '+erro)
             res.redirect('/Reprodutor/listarReprodutor')
-        })  
+        })  */
     }
 	
 }
