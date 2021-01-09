@@ -1,22 +1,29 @@
-const Sequelize = require('sequelize')
 const config = require('../config/config.js')
+const mysql = require('mysql2');
+ 
+// create the connection to database
 
-    //Conexão com o BD MySQL
-    const bd = new Sequelize(config.database.name,config.database.user,config.database.password,
-                    { host:config.database.host, dialect: config.database.dialect
-                })
+	const bd = mysql.createPool({
+  host: config.database.host,
+  port: config.database.port,
+  database: config.database.name,
+  user: config.database.user,
+  password:config.database.password,
+  waitForConnections: config.database.waitForConnections,
+  connectionLimit: config.database.connectionLimit,
+  queueLimit: config.database.queueLimit
+});
+console.log("aconteceu: ", bd)
+	if (!bd){
+		console.log("Falha na conexão: "+e)
+	}
+	else{
+		console.log("BD conectado")
+	}
+	
+	
+module.exports = bd
 
-    bd.authenticate().then(conectado).catch(erro)
 
-    function conectado() {
-        console.log("BD conectado")
-    }
-    
-    function erro(e) {
-        console.log("Falha na conexão: "+e)
-    }
 
-    module.exports = {
-        Sequelize: Sequelize,
-        bd: bd
-    }
+

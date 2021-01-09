@@ -1,3 +1,11 @@
+//APAGAR MODELS/ASSOCIATIONS.JS
+//ALTERAR O BD PARA SE CONECTAR COM O MYSQL
+//ALTERAR OS MODELOS DAS ENTIDADES
+//ALTERAR OS CONTROLLERS PARA REALIZAR AS OPERACOES
+
+
+
+
 // Carregando módulos
 const express = require ('express')
 const servidor = express()
@@ -6,14 +14,15 @@ const bodyParser = require ('body-parser')
 const path = require('path')
 const session = require('express-session')
 const flash = require('connect-flash')
-const Associacoes = require('./models/Associations')
-const passport = require('passport')
-require ('./config/auth')(passport)
+//const Associacoes = require('./models/Associations')
+const reprodutor = require('./models/Reprodutor')
+//const passport = require('passport')
+//require ('./config/auth')(passport)
 
 //exemplo: const ##Entidade##Route = require ('./routes/##Entidade##Route')
 const ReprodutorRoute = require ('./routes/ReprodutorRoutes') 
-const InseminacaoRoute = require ('./routes/InseminacaoRoutes') 
-const PartoRoute = require ('./routes/PartoRoutes') 
+//const InseminacaoRoute = require ('./routes/InseminacaoRoutes') 
+//const PartoRoute = require ('./routes/PartoRoutes') 
 //##REQROUTES##
 
 //Configurações
@@ -25,8 +34,8 @@ const PartoRoute = require ('./routes/PartoRoutes')
             saveUninitialized: true
         }))
 
-        servidor.use(passport.initialize())
-        servidor.use(passport.session())
+        //servidor.use(passport.initialize())
+        //servidor.use(passport.session())
 
         servidor.use(flash())
         servidor.use((req, res, next)=>{
@@ -51,11 +60,9 @@ const PartoRoute = require ('./routes/PartoRoutes')
         servidor.use(middleware)
    
     //Rotas
-        servidor.use('/', ##Entidade##Route.js) 
-        //servidor.use('/##Entidade##', ##Entidade##Route.js) 
         servidor.use('/Reprodutor', ReprodutorRoute) 
-		servidor.use('/Inseminacao', InseminacaoRoute) 
-		servidor.use('/Parto', PartoRoute) 
+		//servidor.use('/Inseminacao', InseminacaoRoutes) 
+		//servidor.use('/Parto', PartoRoutes) 
 		//##INSERIR_ROTAS##
     
     //Inicia Servidor
