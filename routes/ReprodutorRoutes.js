@@ -16,8 +16,8 @@ const ReprodutorController = require ('../controllers/ReprodutorController')
 router.get('/',  ReprodutorController.tabelaReprodutor)
 router.get('/listarReprodutor',  ReprodutorController.tabelaReprodutor)
 router.get('/formCadReprodutor', ReprodutorController.formCadReprodutor)
-router.get('/formAltReprodutor/:id', ReprodutorController.formAltReprodutor)
-router.post('/addAltReprodutor', ReprodutorController.addAltReprodutor)
-router.get('/excReprodutor/:id', ReprodutorController.excReprodutor)
+router.post('/addReprodutor', ReprodutorController.addReprodutor)
+router.post('/altReprodutor', ReprodutorController.altReprodutor)
+router.get('/excReprodutor/:brinco', ReprodutorController.excReprodutor)
 
 module.exports = router
