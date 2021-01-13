@@ -1,0 +1,34 @@
+{
+  "name": "PigVar",
+  "version": "1.0.0",
+  "description": "Este sistema realiza a análise de variabilidade de uma granja, apresentando como resultado o ganho econômico de cada lote de suínos, permitindo a adaptação da análise a granja em questão. Ao longo do tempo, os parâmetros médios iniciais são ajustados automaticamente ao histórico da granja, propiciando uma especialização do software a cada criador.",
+  "main": "PigVar.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "express-session": "^1.17.1",
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "sequelize": "^6.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonio71/PigVar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tonio71/PigVar/issues"
+  },
+  "homepage": "https://github.com/tonio71/PigVar#readme"
+}
