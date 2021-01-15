@@ -1,27 +1,45 @@
 {{#each erros}}
   <div class="alert alert-danger"> {{texto}} </div>
-{{else}}
-  
+{{else}} 
 {{/each}}
 
-<h3> Editar Reprodutor</h3>
-
+<h3> Reprodutores</h3>
   <div class="card">
     <div class="card-body">
-          <form action="/Reprodutor/addAltReprodutor" method='POST'>
-              <p> 
+      <!-- <form action="/Reprodutor/altReprodutor" method='POST'> -->
+      <form action="/Reprodutor/addReprodutor" method='POST'></form>
+        <p> 
+        {{#if Reprodutor}}
+          <label for='brinco'> Brinco: </label>
+            <input readonly type='text' id='brinco' name='brinco' value= '{{Reprodutor.brinco}}' class='form-control'>
+        {{else}}
+          <label for='brinco'> Brinco: </label>
+            <input  type='text' id='brinco' name='brinco' value= '{{Reprodutor.brinco}}' class='form-control'>
+        {{/if}}
 
-              <input type='hidden' id='id' name='id' value="{{Reprodutor.id}}">
-
-              <label for='nome'> Nome: </label>
-                  <input type='text' id='nome' name='nome' value= '{{Reprodutor.nome}}' class='form-control'>
-
-              <label for='slug'> Slug: </label>
-                  <input type='text' id='slug' name='slug' value= '{{Reprodutor.slug}}' class='form-control'> 
-
-              <br>
-              <button type='submit' class='btn btn-success'>Salvar Reprodutor</button>
-
-          </form>
+        <label for='multiplicadora'> Multiplicadora: </label>
+          <input type='text' id='multiplicadora' name='multiplicadora' value= '{{Reprodutor.multiplicadora}}' class='form-control'> 
+        
+        <label for='genetica'> Genética: </label>
+          <input type='text' id='genetica' name='genetica' value= '{{Reprodutor.genetica}}' class='form-control'>      
+       
+        <label for='data_nasc'> Data de Nascimento: </label>
+          <input type='text' id='data_nasc' name='data_nasc' value= '{{Reprodutor.data_nasc}}' class='form-control'> 
+        
+        <label for='peso_nasc'> Peso ao Nascer: </label>
+          <input type='text' id='peso_nasc' name='peso_nasc' value= '{{Reprodutor.peso_nasc}}' class='form-control'> 
+        
+        <label for='data_chegada'> Data de Chegada: </label>
+          <input type='text' id='data_chegada' name='data_chegada' value= '{{Reprodutor.data_chegada}}' class='form-control'> 
+        
+        <label for='peso_chegada'> Peso na chegada: </label>
+          <input type='text' id='peso_chegada' name='peso_chegada' value= '{{Reprodutor.peso_chegada}}' class='form-control'> 
+       
+        <label for='sexo'> Sexo: </label>
+          <input type='text' id='sexo' name='sexo' value= '{{Reprodutor.sexo}}' class='form-control'> 
+                      
+        <br>
+        <button type='submit' class='btn btn-success'>Salvar Reprodutor</button>
+      </form>
     </div>  
   </div>

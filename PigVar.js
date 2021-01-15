@@ -3,9 +3,6 @@
 //ALTERAR OS MODELOS DAS ENTIDADES
 //ALTERAR OS CONTROLLERS PARA REALIZAR AS OPERACOES
 
-
-
-
 // Carregando módulos
 const express = require ('express')
 const servidor = express()

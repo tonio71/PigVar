@@ -4,14 +4,14 @@
   
 {{/each}}
 
-<h2>Tabela de Reprodutor </h2>
+<h2>Tabela de Reprodutores </h2>
 
-<a href='/admin/categorias/add'> 
+<a href='/Reprodutor/formAddAltReprodutor'> 
     <button class="btn btn-success">Cadastrar novo Reprodutor</button>
 </a>
 			<section class="container">
 				<label for="filtrar-tabela">Filtrar:
-							<input type="text" name="filtro" id="filtrar-tabela" placeholder="Digite o nome do paciente">
+							<input type="text" name="filtro" id="filtrar-tabela" placeholder="Digite o brinco do reprodutor">
 				</label>
 				<table>
 					<thead>
@@ -21,7 +21,7 @@
 							<th>Genética</th>
 							<th>Nascimento</th>
 							<th>Peso ao Nascer</th>
-							<th>chegada</th>
+							<th>Chegada</th>
 							<th>Peso ao Chegar</th> 
 							<th>Sexo</th>
 							<th>Operacoes</th>
@@ -30,7 +30,6 @@
 					
 					<tbody id="tabela-reprodutores">
 					    {{#each reprodutores}}
-
 						<tr class="reprodutor">
 							<td class="info-brinco">{{brinco}}</td>
 							<td class="info-multiplicadora">{{multiplicadora}}</td>
@@ -41,20 +40,20 @@
 							<td class="info-peso_chegada">{{peso_chegada}}</td>
 							<td class="info-sexo">{{sexo}}</td>
 							<td class="info-operacoes">
-								<a href ='/admin/categorias/altCategoria/{{dataValues.id}}'> 
-										<button class='btn btn-success mt-3'> alterar </button> </a>
-								<a href ='/admin/categorias/excCategoria/{{dataValues.id}}'> 
-										<button class='btn btn-danger mt-3'> deletar </button> </a>
+								
+								<a href ='/Reprodutor/formAddAltReprodutor/{{brinco}}'> 
+									<button class='btn btn-success mt-3'> Alterar </button> </a>
+								
+								<a href ='/Reprodutor/excReprodutor/{{brinco}}'> 
+									<button class='btn btn-danger mt-3'> Deletar </button> </a>
 
 							</td>
-						</tr>
+						</tr>		
 						
-{{else}}						
-		
-
-
-    <h4 class="mt-4">Nenhum reprodutor registrado !</h4>
-{{/each}}
-</tbody>
-</table>
-</section>
+								
+	{{else}}						
+		<h4 class="mt-4">Nenhum reprodutor registrado !</h4>
+						{{/each}}
+					</tbody>
+				</table>
+			</section>

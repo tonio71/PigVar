@@ -3,7 +3,8 @@
 //
 
 const Banco = require ('../models/BD')
-const mysql = require('mysql2');
+const mysql = require('mysql2')
+
 //const modelReprodutor = require ('../models/Reprodutor')
 
 class ReprodutorController {
@@ -11,13 +12,24 @@ class ReprodutorController {
 	tabelaReprodutor(req,res){
 		console.log("tabela reprodutor")
 		Banco.execute(
-			'SELECT * FROM `reprodutor`',
+			'SELECT \
+				brinco, \
+				multiplicadora,\
+				genetica,\
+				DATE_FORMAT(data_nasc,"%d/%m/%Y") as data_nasc, \
+				peso_nasc,\
+				DATE_FORMAT(data_chegada,"%d/%m/%Y") as data_chegada, \
+				peso_chegada,\
+				sexo\
+			FROM `reprodutor`',
 			[],
+
 			function(err, reprodutores, fields) {
 				if(!err){
-					console.log("TABELAREPRODUTOR............. ", reprodutores)
-					res.json(reprodutores);
-					//res.render('Reprodutor/tabelaReprodutor', {reprodutores: reprodutores})
+					console.log("TABELA REPRODUTOR............. ", reprodutores)
+
+					//res.json(reprodutores);
+					res.render('Reprodutor/tabelaReprodutor', {reprodutores: reprodutores})
 					//console.log("RESULTADOS: ",results); // results contains rows returned by server
 				}
 				else{
@@ -30,8 +42,14 @@ class ReprodutorController {
     }
 
     formCadReprodutor ( req , res ){
-        res.render('Reprodutor/formAddAltReprodutor')
+		res.render('Reprodutor/formAddAltReprodutor')
     }
+
+
+	// 
+	addAltReprodutor ( req , res ){
+	// inserir rotina para char as 2 funções 
+	}
 
 	addReprodutor ( req , res ){
         var erros = []
@@ -42,7 +60,6 @@ class ReprodutorController {
             res.render('Reprodutor/formAddAltReprodutor', {Reprodutor:req.body, erros : erros})
         }
         else{
-
 			var novoReprodutor = {
 				brinco: req.body.brinco,
 				multiplicadora: req.body.multiplicadora,
@@ -55,7 +72,6 @@ class ReprodutorController {
 			}
 			console.log("Reprodutor.......: ", novoReprodutor)
 			//res.json(novoReprodutor);
-			console.log("tamanho do brinco do reprodutor ",req.body.brinco.length)
 			Banco.execute(
 				'INSERT INTO `reprodutor` (brinco, multiplicadora, genetica, data_nasc, peso_nasc, data_chegada, peso_chegada, sexo) VALUES (?,?,?,?,?,?,?,?)',
 				[novoReprodutor.brinco,novoReprodutor.multiplicadora,novoReprodutor.genetica,novoReprodutor.data_nasc,novoReprodutor.peso_nasc, novoReprodutor.data_chegada,novoReprodutor.peso_chegada,novoReprodutor.sexo],
@@ -76,12 +92,24 @@ class ReprodutorController {
 	
     formAltReprodutor ( req , res ){	
 		Banco.execute(
-			'SELECT * FROM `reprodutor` where brinco=?',
-			[req.params.id],
+			'SELECT \
+				brinco, \
+				multiplicadora,\
+				genetica,\
+				DATE_FORMAT(data_nasc,"%d/%m/%Y") as data_nasc, \
+				peso_nasc,\
+				DATE_FORMAT(data_chegada,"%d/%m/%Y") as data_chegada, \
+				peso_chegada,\
+				sexo\
+			FROM `reprodutor`\
+			WHERE brinco=?',
+
+			[req.params.brinco],
 			function(err, reprodutor, fields) {
 				if(!err){
-					res.json(reprodutor)
-					//res.render('Reprodutor/formAddAltReprodutor', {reprodutor: reprodutor})
+					//res.json(reprodutor)
+					console.log('VERIFICACAO: ', reprodutor[0])
+					res.render('Reprodutor/formAddAltReprodutor', {Reprodutor: reprodutor[0]})
 				}
 				else{
 					console.log("Erro: ", err);
@@ -113,24 +141,23 @@ class ReprodutorController {
             }
 			console.log("Reprodutor.......: ", novoReprodutor)
             //res.json(novoReprodutor);
-			console.log("tamanho do brinco do reprodutor ",req.body.brinco.length)
-			
+						
 			Banco.execute(
 				"UPDATE `reprodutor` \
 				SET multiplicadora=?, \
 					genetica=?, \
-					data_nasc=?, \
+					data_nasc= STR_TO_DATE(?,'%d/%m/%Y'), \
 					peso_nasc=?, \
-					data_chegada=?, \
+					data_chegada=STR_TO_DATE(?,'%d/%m/%Y'), \
 					peso_chegada=?, \
 					sexo=? \
 				WHERE brinco = ?",
 				[novoReprodutor.multiplicadora,novoReprodutor.genetica,novoReprodutor.data_nasc,novoReprodutor.peso_nasc, novoReprodutor.data_chegada,novoReprodutor.peso_chegada,novoReprodutor.sexo,novoReprodutor.brinco],
 				function(err, reprodutor, fields) {
 					if(!err){
-						res.json(reprodutor)
+						//res.json(reprodutor)
 						//req.flash('success_msg', 'Cadastrado com sucesso!!!')
-						//res.redirect('/Reprodutor/listarReprodutor')					
+						res.redirect('/Reprodutor/listarReprodutor')					
 					}else{
 						console.log("Erro: ", err);
 						//req.flash('error_msg', 'Erro!!! Não foi possível cadastrar. '+erro)
@@ -139,8 +166,7 @@ class ReprodutorController {
 				}
 			);
         }
-    }
-	
+    }	
 	excReprodutor(req, res){
 		console.log("Excluir.....: ",req.params.brinco )
 		Banco.execute(
@@ -148,8 +174,8 @@ class ReprodutorController {
 			[req.params.brinco],
 			function(err, reprodutor, fields) {
 				if(!err){
-					res.json(reprodutor)
-					//res.render('Reprodutor/formAddAltReprodutor', {reprodutor: reprodutor})
+					//res.json(reprodutor)
+					res.redirect('/Reprodutor/listarReprodutor')
 				}
 				else{
 					console.log("Erro: ", err);
