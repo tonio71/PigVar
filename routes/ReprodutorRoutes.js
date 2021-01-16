@@ -16,13 +16,15 @@ const ReprodutorController = require ('../controllers/ReprodutorController')
 router.get('/',  ReprodutorController.tabelaReprodutor)
 router.get('/listarReprodutor',  ReprodutorController.tabelaReprodutor)
 
-// PARA CADASTRAR UM NOVO REPRODUTOR
+// FORMULÁRIO PARA CADASTRAR UM NOVO REPRODUTOR
 router.get('/formAddAltReprodutor', ReprodutorController.formCadReprodutor)
-router.post('/addReprodutor', ReprodutorController.addReprodutor)
 
-// PARA ALTERAR REPRODUTOR PELO NÚMERO DO BRINCO
+// FORMULÁRIO PARA ALTERAR REPRODUTOR PELO NÚMERO DO BRINCO
 router.get('/formAddAltReprodutor/:brinco', ReprodutorController.formAltReprodutor)
-router.post('/altReprodutor', ReprodutorController.altReprodutor)
+
+
+// OPERAÇÃO PARA CADASTRAR E ALTERAR REPRODUTOR PELO NÚMERO DO BRINCO
+router.post('/addAltReprodutor', ReprodutorController.addAltReprodutor)
 
 router.get('/excReprodutor/:brinco', ReprodutorController.excReprodutor)
 
