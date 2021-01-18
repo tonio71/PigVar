@@ -13,10 +13,20 @@ const InseminacaoController = require ('../controllers/InseminacaoController')
 //Rotas da Entidade
 //router.get('/categorias',  eAdmin, CategoriaController.listarCategorias)
 
+// CONSULTAR
+router.get('/',  InseminacaoController.tabelaInseminacao)
 router.get('/listarInseminacao',  InseminacaoController.tabelaInseminacao)
-router.get('/formCadInseminacao', InseminacaoController.formCadInseminacao)
-router.get('/formAltInseminacao/:id', InseminacaoController.formAltInseminacao)
+
+// FORMULÁRIO PARA CADASTRAR UM NOVO Inseminacao
+router.get('/formAddAltInseminacao', InseminacaoController.formCadInseminacao)
+
+// FORMULÁRIO PARA ALTERAR Inseminacao PELO NÚMERO DO BRINCO
+router.get('/formAddAltInseminacao/:brinco_m/:brinco_f/:data', InseminacaoController.formAltInseminacao)
+
+
+// OPERAÇÃO PARA CADASTRAR E ALTERAR Inseminacao PELO NÚMERO DO BRINCO
 router.post('/addAltInseminacao', InseminacaoController.addAltInseminacao)
-router.get('/excInseminacao/:id', InseminacaoController.excInseminacao)
+
+router.get('/excInseminacao/:brinco_m/:brinco_f/:data', InseminacaoController.excInseminacao)
 
 module.exports = router

@@ -17,8 +17,8 @@ const reprodutor = require('./models/Reprodutor')
 //require ('./config/auth')(passport)
 
 //exemplo: const ##Entidade##Route = require ('./routes/##Entidade##Route')
-const ReprodutorRoute = require ('./routes/ReprodutorRoutes') 
-//const InseminacaoRoute = require ('./routes/InseminacaoRoutes') 
+const ReprodutorRoutes = require ('./routes/ReprodutorRoutes') 
+const InseminacaoRoutes = require ('./routes/InseminacaoRoutes') 
 //const PartoRoute = require ('./routes/PartoRoutes') 
 //##REQROUTES##
 
@@ -57,8 +57,8 @@ const ReprodutorRoute = require ('./routes/ReprodutorRoutes')
         servidor.use(middleware)
    
     //Rotas
-        servidor.use('/Reprodutor', ReprodutorRoute) 
-		//servidor.use('/Inseminacao', InseminacaoRoutes) 
+        servidor.use('/Reprodutor', ReprodutorRoutes)
+		servidor.use('/Inseminacao', InseminacaoRoutes) 
 		//servidor.use('/Parto', PartoRoutes) 
 		//##INSERIR_ROTAS##
     

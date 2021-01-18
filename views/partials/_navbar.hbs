@@ -1,125 +1,54 @@
-<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
-  	<a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
-	  	<svg class="d-block" width="36" height="36" viewBox="0 0 612 612" xmlns="http://www.w3.org/2000/svg" focusable="false"><title>Bootstrap</title><path fill="currentColor" d="M510 8a94.3 94.3 0 0 1 94 94v408a94.3 94.3 0 0 1-94 94H102a94.3 94.3 0 0 1-94-94V102a94.3 94.3 0 0 1 94-94h408m0-8H102C45.9 0 0 45.9 0 102v408c0 56.1 45.9 102 102 102h408c56.1 0 102-45.9 102-102V102C612 45.9 566.1 0 510 0z"></path><path fill="currentColor" d="M196.77 471.5V154.43h124.15c54.27 0 91 31.64 91 79.1 0 33-24.17 63.72-54.71 69.21v1.76c43.07 5.49 70.75 35.82 70.75 78 0 55.81-40 89-107.45 89zm39.55-180.4h63.28c46.8 0 72.29-18.68 72.29-53 0-31.42-21.53-48.78-60-48.78h-75.57zm78.22 145.46c47.68 0 72.73-19.34 72.73-56s-25.93-55.37-76.46-55.37h-74.49v111.4z"></path></svg>
-	</a>
+<header class="navbar navbar-expand-lg navbar-dark fixed-top h5 mt-0 pt-0 pb-0" style="background-color: #563d7c">
+		<a class="navbar-brand" href="/usuario/login"><svg class="d-block" width="36" height="36" viewBox="0 0 612 612" xmlns="http://www.w3.org/2000/svg" focusable="false"><title>Bootstrap</title><path fill="currentColor" d="M510 8a94.3 94.3 0 0 1 94 94v408a94.3 94.3 0 0 1-94 94H102a94.3 94.3 0 0 1-94-94V102a94.3 94.3 0 0 1 94-94h408m0-8H102C45.9 0 0 45.9 0 102v408c0 56.1 45.9 102 102 102h408c56.1 0 102-45.9 102-102V102C612 45.9 566.1 0 510 0z"></path><path fill="currentColor" d="M196.77 471.5V154.43h124.15c54.27 0 91 31.64 91 79.1 0 33-24.17 63.72-54.71 69.21v1.76c43.07 5.49 70.75 35.82 70.75 78 0 55.81-40 89-107.45 89zm39.55-180.4h63.28c46.8 0 72.29-18.68 72.29-53 0-31.42-21.53-48.78-60-48.78h-75.57zm78.22 145.46c47.68 0 72.73-19.34 72.73-56s-25.93-55.37-76.46-55.37h-74.49v111.4z"></path></svg>
+		</a>
 
-	<div class="navbar-nav-scroll">
-		<ul class="navbar-nav bd-navbar-nav flex-row">
-			<li class="nav-item">
-			<a class="nav-link " href="/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Bootstrap');">Reprodutores</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link active" href="/docs/4.0/getting-started/introduction/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Docs');">Inseminação</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link " href="/docs/4.0/examples/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Examples');">parto</a>
-			</li>
-			
-			<li class="nav-item dropdown">
-				<a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Relatórios</a>
-				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
-					<a class="dropdown-item" href="/docs/4.1/">Relatorio 1</a>
-					<a class="dropdown-item" href="https://v4-alpha.getbootstrap.com/">Relatorio 2</a>
-					<a class="dropdown-item" href="https://getbootstrap.com/docs/3.3/">Relatorio 3</a>
-					<a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">Relatorio 4</a>
-				</div>
-			</li>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
 
-			<li class="nav-item">
-			<a class="nav-link" href="https://expo.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');" target="_blank" rel="noopener">Simulação</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="https://blog.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Blog');" target="_blank" rel="noopener">Configuração</a>
-			</li>
-		</ul>
-	</div>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-	<ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-		{{#if user}}
-			<li class="nav-item">
-				<a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href="/usuario/logout">Sair</a>
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link " href="/Reprodutor" >Reprodutores</a>
+				</li>
 
-			</li>
-		{{else}}
-			<li class="nav-item">
-				<a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href="/usuario/login">Entrar</a>
-			</li>
-		{{/if}}
-	</ul>
-</header>
+				<li class="nav-item">
+					<a class="nav-link " href="/Inseminacao" >Inseminação</a>
+				</li>
 
+				<li class="nav-item">
+					<a class="nav-link " href="/Parto" >Parto</a>
+				</li>
 
+				<li class="nav-item dropdown">
+					<a class="nav-item nav-link dropdown-toggle" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						Relatórios
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+						<a class="dropdown-item" href="/">Relatorio 1</a>
+						<a class="dropdown-item" href="/">Relatorio 2</a>
+						<a class="dropdown-item" href="/">Relatorio 3</a>
+						<a class="dropdown-item" href="/">Relatorio 4</a>
+					</div>
+				</li>
 
-
-
-
-<!--
-
-<nav class="navbar navbar-expand-lg navbar-light h5 pt-0 pb-0" style="background-color: #e3f2fd;" >
-
-	<div class="container">
-		<div class="row">
-			<div class="col-1">
-				<a class="navbar-brand pl-2" href="/">
-				<svg id="Capa_1" enable-background="new 0 0 512 512" height="50" viewBox="0 0 512 512" width="50" xmlns="http://www.w3.org/2000/svg"><g><path d="m48.193 181h-3.193c-24.814 0-45-20.186-45-45s20.186-45 45-45c8.291 0 15 6.709 15 15s-6.709 15-15 15c-8.276 0-15 6.724-15 15s6.724 15 15 15h3.193c8.291 0 15 6.709 15 15s-6.709 15-15 15z" fill="#ffc9d0"/><path d="m497 181c-49.966 0-69.789-36.753-75.985-48.838-.044-.073-.088-.161-.132-.249-2.124-39.463-34.893-70.913-74.883-70.913h-30c-8.291 0-15 6.709-15 15v30c0 5.134.69 10.115 1.686 15h-91.686-85.639c-64.76 0-119.633 48.062-124.907 109.424-2.798 32.534 8.394 64.658 29.546 89.106v116.558c.059 8.247 6.753 14.912 15 14.912h60c8.291 0 15-6.709 15-15v-65.771c28.623 12.349 60.312 18.523 91 18.523s61.377-6.174 90-18.523v65.771c0 8.291 6.709 15 15 15h60c8.291 0 15-6.709 15-15v-108.896c19.966-8.042 30.322-23.892 40.225-39.448l46.703-11.426c20.053-5.01 34.072-22.969 34.072-43.653v-36.577c0-8.291-6.709-15-15-15z" fill="#ffc9d0"/><path d="m301 436c0 8.291 6.709 15 15 15h60c8.291 0 15-6.709 15-15v-108.896c19.966-8.042 30.322-23.892 40.225-39.448l46.703-11.426c20.053-5.01 34.072-22.969 34.072-43.653v-36.577c0-8.291-6.709-15-15-15-49.966 0-69.789-36.753-75.985-48.838-.044-.073-.088-.161-.132-.249-2.124-39.463-34.893-70.913-74.883-70.913h-30c-8.291 0-15 6.709-15 15v30c0 5.134.69 10.115 1.686 15h-91.686v267.751c30.688 0 61.377-6.174 90-18.523z" fill="#ffa7b3"/><path d="m321.923 156.781c-1.875-2.007-4.202-3.589-5.847-5.781h-24.531l-80.545 15-81.53-15h-4.109c-9.424 0-18.419 1.679-27.079 4.127l-67.784 85.704c.011 11.591 2.036 22.899 6.266 33.488l55.58 63.638c-.07.108-.066.236-.132.346 1.282-2.128 3.034-3.988 5.259-5.283 4.614-2.681 10.327-2.695 14.971-.044 4.259 2.432 8.736 4.297 13.13 6.385h85.428 84.428c4.395-2.087 8.871-3.953 13.13-6.385 4.644-2.651 10.356-2.637 14.971.044 2.137 1.245 3.781 3.054 5.052 5.074l.075-.137 28.984-52.529 38.752-.123c6.008-7.855 10.798-15.837 12.772-18.862 1.379-2.153 3.387-3.682 5.599-4.878z" fill="#ffa7b3"/><path d="m308.559 332.978c4.644-2.651 10.356-2.637 14.971.044 2.137 1.245 3.781 3.054 5.052 5.074l.075-.137 28.984-52.529 38.752-.123c6.008-7.855 10.798-15.837 12.772-18.862 1.379-2.153 3.387-3.682 5.599-4.878l-92.84-104.786c-1.875-2.007-4.202-3.589-5.847-5.781h-24.531l-80.546 15v173.362h84.428c4.395-2.087 8.872-3.953 13.131-6.384z" fill="#ff8596"/><path d="m92.212 338.304c-.253.419-.302.899-.515 1.342.209-.441.26-.915.515-1.342z" fill="none"/><path d="m98.282 155.127c-36.663 10.367-64.746 40.681-67.945 77.875-.225 2.633.159 5.211.161 7.83 25.505-18.979 53.672-33.697 83.507-43.777-4.702-18.113-11.065-32.577-15.723-41.928z" fill="#ff6c6c"/><path d="m92.344 337.958c.278-.439 27.656-44.297 27.656-96.958 0-4.807-.368-9.465-.778-14.092-29.897 10.677-57.748 26.726-82.458 47.411 4.244 10.622 10.21 20.568 18.285 28.98 2.651 2.769 4.922 6.46 4.951 10.298v107.403h30v-75c0-1.392 2.274-7.934 2.344-8.042z" fill="#ff6c6c"/><g fill="#ff6c6c"><path d="m211 181c22.967 0 45.419 2.802 67.216 7.758 3.926-14.897 8.853-27.673 13.33-37.758h-80.546-81.53c4.453 10.074 9.408 22.978 13.343 37.908 21.883-5.022 45.35-7.908 68.187-7.908z"/><path d="m211 270.764c21.37 0 42.742-1.697 61.707-5.094-1.024-7.954-1.707-16.154-1.707-24.67 0-7.822.515-15.436 1.39-22.789-19.898-4.596-40.404-7.211-61.39-7.211-20.903 0-42.464 2.679-62.472 7.35.881 7.341 1.472 14.872 1.472 22.65 0 8.516-.683 16.716-1.707 24.67 18.965 3.396 41.335 5.094 62.707 5.094z"/><path d="m278.582 294.621c-20.846 3.867-43.504 6.379-67.582 6.379s-47.736-2.512-68.582-6.379c-5.078 18.807-11.697 34.232-16.846 44.742 26.653 12.664 56.54 18.995 85.428 18.995 28.887 0 57.775-6.332 84.428-18.995-5.149-10.511-11.768-25.936-16.846-44.742z"/></g><g fill="#e63950"><path d="m291.546 151h-80.546v30c22.967 0 45.419 2.802 67.216 7.758 3.926-14.897 8.853-27.673 13.33-37.758z"/><path d="m278.582 294.621c-20.846 3.867-43.504 6.379-67.582 6.379v57.358c28.887 0 57.775-6.332 84.428-18.995-5.149-10.511-11.768-25.936-16.846-44.742z"/><path d="m271 241c0-7.822.515-15.436 1.39-22.789-19.898-4.596-40.404-7.211-61.39-7.211v59.764c21.37 0 42.742-1.697 61.707-5.094-1.024-7.954-1.707-16.154-1.707-24.67z"/><path d="m394.325 145.844c-2.446-2.74-3.325-6.167-3.325-9.844 0-24.814-20.186-45-45-45h-15v15c0 19.409 12.363 36.577 30.762 42.7 7.852 2.622 12.1 11.118 9.492 18.984-2.607 7.852-11.03 12.041-18.984 9.492-12.112-4.039-22.042-11.508-30.346-20.396-4.53 9.391-10.419 23.304-14.815 40.106 39.771 13.398 76.181 35.436 107.655 64.68 1.099-.593 2.164-1.262 3.395-1.567l52.489-12.861c6.68-1.685 11.353-7.661 11.353-14.561v-22.485c-28.917-3.53-64.297-18.618-87.676-64.248z"/><path d="m301 241c0 52.661 27.378 96.519 27.656 96.958l-.075.137c1.483 2.355 2.419 5.027 2.419 7.905v75h30v-105c0-7.104 4.995-13.242 11.953-14.692 10.51-2.175 16.813-7.339 23.439-16.002-27.614-26.146-59.604-45.963-94.53-58.411-.417 4.646-.862 9.287-.862 14.105z"/></g></g></svg>  
-				<p class="h6">PigVar</p>
-				</a>
-			</div>
-
-			<div class="col-8">
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-							<a class="nav-link" href="/">Reprodutores <span class="sr-only">(current)</span></a>
-						</li>
-
-						<li class="nav-item"> 
-							<a class="nav-link" href="/listaDeCategorias">Inseminação</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/admin/postagens">Parto</a>
-						</li>
-
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Relatórios</a>
-							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" href="#">rel 1</a></li>
-								<li><a class="dropdown-item" href="#">rel 2</a></li>
-								<li><a class="dropdown-item" href="#">rel 3</a></li>
-							</ul>
-						</li>  
-
-						<li class="nav-item">
-							<a class="nav-link" href="/admin/postagens">Simulação</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/admin/postagens">Configuração</a>
-						</li>
-					</ul> 
-				</div>
-			</div>
-			
-			<div class="col-3"> 
-				<ul>
-					{{#if user}}
+				<li class="nav-item">
+					<a class="nav-link " href="/Simulacao" >Simulação</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link " href="/Configuracao" >Configuração</a>
+				</li>
+				{{#if user}}
 					<li class="nav-item">
 						<a class="nav-link" href="/usuario/logout">Sair</a>
 					</li>
-					{{else}}
+				{{else}}
 					<li class="nav-item">
 						<a class="nav-link" href="/usuario/login">Entrar</a>
 					</li>
-					{{/if}}
-				</ul>
-			</div>
+				{{/if}}
+			</ul>
 		</div>
-	</div>
-
-</nav>-->
+</header>
