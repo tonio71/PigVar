@@ -13,7 +13,7 @@ const ReprodutorController = require ('../controllers/ReprodutorController')
 //router.get('/categorias',  eAdmin, CategoriaController.listarCategorias)
 
 // CONSULTAR
-router.get('/',  ReprodutorController.tabelaReprodutor)
+router.get('',  ReprodutorController.tabelaReprodutor)
 router.get('/listarReprodutor',  ReprodutorController.tabelaReprodutor)
 
 // FORMULÁRIO PARA CADASTRAR UM NOVO REPRODUTOR

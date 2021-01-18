@@ -27,7 +27,7 @@ class ReprodutorController {
 				}
 				else{
 					console.log("Erro: ", err);
-					req.flash('error_msg', 'Erro na consulta')
+					req.flash('error_msg', 'Erro na montagem da Tabela de Reprodutores!!!')
 					res.redirect('/')
 				}
 			}
@@ -57,36 +57,34 @@ class ReprodutorController {
 				peso_chegada: parseFloat(req.body.peso_chegada),
 				sexo: req.body.sexo
 			}
-						
-			if(req.body.operacao === 'alteracao'){
-				this.altReprodutor (req, res, novoReprodutor)
-			} 
-			else{
-				if(req.body.operacao === 'cadastro'){
-					this.addReprodutor(req, res, novoReprodutor)
-				}
-				else{
-					res.redirect('/Reprodutor/listarReprodutor')
-				}
-			}	
-		}
-	}
+				
+			Banco.execute(
+				"INSERT INTO `reprodutor` (brinco, multiplicadora, genetica, data_nasc, peso_nasc, data_chegada, peso_chegada, sexo) \
+					VALUES (?,?,?, STR_TO_DATE(?,'%Y-%m-%d') ,?, STR_TO_DATE(?,'%Y-%m-%d') ,?,?) \
+					ON DUPLICATE KEY UPDATE \
+						multiplicadora=?, \
+						genetica=?, \
+						data_nasc= STR_TO_DATE(?,'%Y-%m-%d'), \
+						peso_nasc=?, \
+						data_chegada=STR_TO_DATE(?,'%Y-%m-%d'), \
+						peso_chegada=?, \
+						sexo=? ",
 
-	addReprodutor ( req , res, novoReprodutor){
-       	Banco.execute(
-			'INSERT INTO `reprodutor` (brinco, multiplicadora, genetica, data_nasc, peso_nasc, data_chegada, peso_chegada, sexo) VALUES (?,?,?,?,?,?,?,?)',
-			[novoReprodutor.brinco,novoReprodutor.multiplicadora,novoReprodutor.genetica,novoReprodutor.data_nasc,novoReprodutor.peso_nasc, novoReprodutor.data_chegada,novoReprodutor.peso_chegada,novoReprodutor.sexo],
-			function(err, reprodutor, fields) {
-				if(!err){
-					req.flash('success_msg', 'Cadastrado com sucesso!!!')
-					res.redirect('/Reprodutor/listarReprodutor')					
-				}else{
-					console.log("Erro: ", err);
-					req.flash('error_msg', 'Erro!!! Não foi possível cadastrar. ')
-					res.redirect('/Reprodutor/listarReprodutor')
+				[novoReprodutor.brinco,novoReprodutor.multiplicadora,novoReprodutor.genetica,novoReprodutor.data_nasc,novoReprodutor.peso_nasc, novoReprodutor.data_chegada,novoReprodutor.peso_chegada,novoReprodutor.sexo, 
+				novoReprodutor.multiplicadora,novoReprodutor.genetica,novoReprodutor.data_nasc,novoReprodutor.peso_nasc, novoReprodutor.data_chegada,novoReprodutor.peso_chegada,novoReprodutor.sexo],
+
+				function(err, reprodutor, fields) {
+					if(!err){
+						req.flash('success_msg', 'Dados salvos com sucesso!!!')
+						res.redirect('/Reprodutor/listarReprodutor')					
+					}else{
+						console.log("Erro: ", err);
+						req.flash('error_msg', 'Erro. Não foi possível salvar os dados!!!')
+						res.redirect('/Reprodutor/listarReprodutor')
+					}
 				}
-			}
-		);
+			);
+		}
 	}
 	
     formAltReprodutor ( req , res ){	
@@ -95,9 +93,9 @@ class ReprodutorController {
 				brinco, \
 				multiplicadora,\
 				genetica,\
-				DATE_FORMAT(data_nasc,"%d/%m/%Y") as data_nasc, \
+				DATE_FORMAT(data_nasc,"%Y-%m-%d") as data_nasc, \
 				peso_nasc,\
-				DATE_FORMAT(data_chegada,"%d/%m/%Y") as data_chegada, \
+				DATE_FORMAT(data_chegada,"%Y-%m-%d") as data_chegada, \
 				peso_chegada,\
 				sexo\
 			FROM `reprodutor`\
@@ -113,50 +111,25 @@ class ReprodutorController {
 				}
 				else{
 					console.log("Erro: ", err);
-					req.flash('error_msg', 'Erro na consulta')
+					req.flash('error_msg', 'Erro na montagem do Formulário de Alteração de Dados do Reprodutor!!!')
 					res.redirect('/Reprodutor/listarReprodutor')
 				}
 			}
 		);
     }	
-
-    altReprodutor ( req , res, novoReprodutor ){
-		Banco.execute(
-			"UPDATE `reprodutor` \
-			SET multiplicadora=?, \
-				genetica=?, \
-				data_nasc= STR_TO_DATE(?,'%d/%m/%Y'), \
-				peso_nasc=?, \
-				data_chegada=STR_TO_DATE(?,'%d/%m/%Y'), \
-				peso_chegada=?, \
-				sexo=? \
-			WHERE brinco = ?",
-			[novoReprodutor.multiplicadora,novoReprodutor.genetica,novoReprodutor.data_nasc,novoReprodutor.peso_nasc, novoReprodutor.data_chegada,novoReprodutor.peso_chegada,novoReprodutor.sexo,novoReprodutor.brinco],
-			
-			function(err, reprodutor, fields) {
-				if(!err){
-					req.flash('success_msg', 'Alterado com sucesso!!!')
-					res.redirect('/Reprodutor/listarReprodutor')					
-				}else{
-					console.log("Erro: ", err);
-					req.flash('error_msg', 'Erro!!! Não foi possível alterar. ')
-					res.redirect('/Reprodutor/listarReprodutor')
-				}
-			}
-		);
-	}
-			
+		
 	excReprodutor(req, res){
 		Banco.execute(
 			"DELETE FROM `reprodutor` WHERE brinco=?;",
 			[req.params.brinco],
 			function(err, reprodutor, fields) {
 				if(!err){
+					req.flash('success_msg', 'Deletado com sucesso!!!')
 					res.redirect('/Reprodutor/listarReprodutor')
 				}
 				else{
 					console.log("Erro: ", err);
-					req.flash('error_msg', 'Erro na consulta')
+					req.flash('error_msg', 'Erro na exclusão. Reprodutor não excluido.')
 					res.redirect('/Reprodutor/listarReprodutor')
 				}
 			}
