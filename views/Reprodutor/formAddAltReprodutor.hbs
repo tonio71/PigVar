@@ -3,7 +3,7 @@
 {{else}} 
 {{/each}}
 
-<h3> Reprodutores</h3>
+<h3>Reprodutor</h3>
 <div class="card">
   <div class="card-body">
     
@@ -12,14 +12,9 @@
       {{#if Reprodutor}}
         <label for='brinco'> Brinco: </label>
           <input readonly type='text' id='brinco' name='brinco' value= '{{Reprodutor.brinco}}' class='form-control'>
-          <input type='hidden' id='operacao' name='operacao' value= 'alteracao' class='form-control'>
-
-
       {{else}}
         <label for='brinco'> Brinco: </label>
           <input type='text' id='brinco' name='brinco' value= '{{Reprodutor.brinco}}' maxlength="7" title="Campo não pode ser vazio nem maior que 7 caracteres." class='form-control'>
-          <input type='hidden' id='operacao' name='operacao' value= 'cadastro' class='form-control'>
-
       {{/if}}
 
       <label for='multiplicadora'> Multiplicadora: </label>

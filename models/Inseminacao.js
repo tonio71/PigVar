@@ -1,10 +1,17 @@
 const Banco = require ('./BD')
+const mysql = require('mysql2');
 
-	//modelos
-	var Inseminacao = Banco.bd.define('Inseminacao',{
-		brinco_macho: {type: Banco.Sequelize.STRING(7), allowNull:false},
-		brinco_femea: {type: Banco.Sequelize.STRING(7), allowNull:false},
-        data_inseminacao: {type: Banco.Sequelize.DATE, allowNull:false}
-    })
+  Banco.query(
+		'SELECT * FROM `inseminacao`',
+		[],
+		function(err, results, fields) {
+			if(!err){
+				console.log("RESULTADOS: ",results); // results contains rows returned by server
+			}
+			else{
+				console.log("Erro: ", err);
+			}
+		}
+	);
 
-    module.exports = Inseminacao
+// module.exports = Inseminacao

@@ -4,24 +4,27 @@
   
 {{/each}}
 
-<h3> Editar Inseminacao</h3>
+<h3>Inseminação</h3>
+<div class="card">
+  <div class="card-body">
+    
+    <form action="/Inseminacao/addAltInseminacao" method='POST'>
+     
+      <label for='brinco_femea'> Brinco da fêmea: </label>
+          <input type='hidden' id='brinco_femea' name='brinco_femea_old' value= '{{Inseminacao.brinco_femea}}' class='form-control'>
+          <input type='text' id='brinco_femea' name='brinco_femea' value= '{{Inseminacao.brinco_femea}}' class='form-control'>
 
-  <div class="card">
-    <div class="card-body">
-          <form action="/Inseminacao/addAltInseminacao" method='POST'>
-              <p> 
+      <label for='brinco_macho'> Brinco do macho: </label>   
+          <input type='hidden' id='brinco_macho' name='brinco_macho_old' value= '{{Inseminacao.brinco_macho}}' class='form-control'>
+          <input type='text' id='brinco_macho' name='brinco_macho' value= '{{Inseminacao.brinco_macho}}' class='form-control'>
 
-              <input type='hidden' id='id' name='id' value="{{Inseminacao.id}}">
-
-              <label for='nome'> Nome: </label>
-                  <input type='text' id='nome' name='nome' value= '{{Inseminacao.nome}}' class='form-control'>
-
-              <label for='slug'> Slug: </label>
-                  <input type='text' id='slug' name='slug' value= '{{Inseminacao.slug}}' class='form-control'> 
-
-              <br>
-              <button type='submit' class='btn btn-success'>Salvar Inseminacao</button>
-
-          </form>
-    </div>  
-  </div>
+      <label for='data_inseminacao'> Data da Inseminação: </label>   
+          <input type='hidden' id='data_inseminacao' name='data_inseminacao_old' value= '{{Inseminacao.data_inseminacao}}' class='form-control'>
+          <input type='date' id='data_inseminacao' name='data_inseminacao' value= '{{Inseminacao.data_inseminacao}}' class='form-control'> 
+          
+      <br>
+      <button type='submit' class='btn btn-success'>Salvar Inseminação</button>
+      <button type='reset' class='btn btn-success'>Limpar Dados</button>
+    </form>
+  </div>  
+</div>

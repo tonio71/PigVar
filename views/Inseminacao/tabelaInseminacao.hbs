@@ -1,28 +1,44 @@
+
 {{#each erros}}
   <div class="alert alert-danger"> {{texto}} </div>
 {{else}}
   
 {{/each}}
 
-<h1>Página de Categorias </h1>
+<h1>Tabela de Inseminações </h1>
 
-<a href='/admin/categorias/add'> 
-    <button class="btn btn-success">Criar nova Categoria</button>
+<a href='/Inseminacao/formAddAltInseminacao'> 
+    <button class="btn btn-success">Cadastrar nova Inseminação</button>
 </a>
-
-{{#each categorias}}
-    <div class= "card mt-4">
-        <div class= "card-body">
-            <h4> {{dataValues.nome}} </h4>
-            <small>Slug:  {{dataValues.slug}}</small> <br>
-            <small>Data de criação:  {{dataValues.date}}</small> <br> <br>
-            <a href ='/admin/categorias/altCategoria/{{dataValues.id}}'> 
-                <button class='btn btn-success mt-3'> alterar </button> </a>
-            <a href ='/admin/categorias/excCategoria/{{dataValues.id}}'> 
-                <button class='btn btn-danger mt-3'> deletar </button> </a>
-        </div>
-    </div>
-
-{{else}}
-    <h4 class="mt-4">Nenhuma categoria registrada !</h4>
-{{/each}}
+<section class="container">
+    <label for="filtrar-tabela">Filtrar:
+        <input type="text" name="filtro" id="filtrar-tabela" placeholder="Digite o brinco do ?????"></label>
+        <table>
+            <thead>
+                <tr>
+                    <th>Brinco da fêmea</th>
+                    <th>Brinco do macho</th>
+                    <th>Data da inseminação</th>
+                    <th>Operacoes</th>
+                </tr>
+            </thead>
+            
+            <tbody id="tabela-inseminacoes">
+                {{#each inseminacoes}}
+                    <tr class="inseminacao">
+                        <td class="info-brinco-femea">{{brinco_femea}}</td>
+                        <td class="info-brinco_macho">{{brinco_macho}}</td>
+                        <td class="info-data-inseminacao">{{data_inseminacao}}</td>
+                        <td class="info-operacoes">
+                        <a href ='/Inseminacao/formAddAltInseminacao/{{brinco_femea}}/{{brinco_macho}}/{{data_inseminacaoLink}}'>
+                            <button class='btn btn-success mt-3'> Alterar </button> </a>
+                        <a href ='/Inseminacao/excInseminacao/{{brinco_femea}}/{{brinco_macho}}/{{data_inseminacaoLink}}'> 
+                            <button class='btn btn-danger mt-3'> Deletar </button> </a>
+                        </td>
+                    </tr>		
+                {{else}}						
+                    <h4 class="mt-4">Nenhuma inseminção registrada!!!</h4>
+                {{/each}}
+            </tbody>
+        </table>
+</section>

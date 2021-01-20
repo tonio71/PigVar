@@ -2,91 +2,148 @@
 // Template para criação de controller de Entidades
 //
 
-const modelInseminacao = require ('../models/Inseminacao')
+const Banco = require ('../models/BD')
+const mysql = require('mysql2')
 
 class InseminacaoController {
 
-	listarInseminacao(req,res){  
-        modelInseminacao.findAll(
-            {  order: [['date', 'DESC']] }
-        )
-        .then( function(arrayInseminacao){
-                res.render('Inseminacao/listarInseminacao', {arrayInseminacao: arrayInseminacao})
-            })
-        .catch( function(erro){
-            req.flash('error_msg', 'Erro na consulta'+erro)
-            res.redirect('/')
-        })
+	tabelaInseminacao(req,res){
+		Banco.execute(
+			'SELECT \
+				brinco_femea, \
+				brinco_macho,\
+				DATE_FORMAT(data_inseminacao,"%d/%m/%Y") as data_inseminacao \
+			FROM `inseminacao`',
+            [],
+            
+			function(err, inseminacoes, fields) {
+				if(!err){               
+                    for (var i = 0; i < inseminacoes.length; i++) {
+                        //inseminacoes[i].data_inseminacaoLink = (inseminacoes[i].data_inseminacao).replace(/\//g,'-')
+                        inseminacoes[i].data_inseminacaoLink = 
+                                (inseminacoes[i].data_inseminacao).substr(6, 4)+'-'
+                                + (inseminacoes[i].data_inseminacao).substr(3, 2)+'-'
+                                + (inseminacoes[i].data_inseminacao).substr(0, 2)
+                    } 
+                    res.render('Inseminacao/tabelaInseminacao', {inseminacoes: inseminacoes})
+				}
+				else{
+					console.log("Erro: ", err);
+					req.flash('error_msg', 'Erro na montagem da Tabela de Inseminações!!!')
+					res.redirect('/')
+				}
+			}
+		);	
     }
 
     formCadInseminacao ( req , res ){
-        res.render('Inseminacao/formAddAltInseminacao')
+		res.render('Inseminacao/formAddAltInseminacao')
     }
 
-    formAltInseminacao ( req , res ){
-        modelInseminacao.findOne(
-            {  where: {id:req.params.id} }
-        )
-        .then( function(umInseminacao){
-                umInseminacao.dataValues.senha2=umInseminacao.dataValues.senha
-                res.render('Inseminacao/formAddAltInseminacao', {Inseminacao: umInseminacao.dataValues})
-        })
-        .catch( function(erro){
-            req.flash('error_msg', 'Erro na consulta'+erro)
-            res.redirect('/Inseminacao/listarInseminacao')
-        })
-    }
-
-    async addAltInseminacao ( req , res ){
-        var erros = []
+	addAltInseminacao = ( req , res ) => {
+		var erros = []
 		// Escrever código para validação
 		// var erros = ValidaçãoInseminacao(req)
-
-        
+       
         if(erros.length > 0){
             res.render('Inseminacao/formAddAltInseminacao', {Inseminacao:req.body, erros : erros})
         }
-        else{                
-            var novoInseminacao = {
-				nome: req.body.nome,
-                slug: req.body.slug
+        else{
+			var novoInseminacao = {
+				brinco_femea_old: req.body.brinco_femea_old,
+				brinco_macho_old: req.body.brinco_macho_old,
+                data_inseminacao_old: req.body.data_inseminacao_old,
+                brinco_femea: req.body.brinco_femea,
+				brinco_macho: req.body.brinco_macho,
+                data_inseminacao: req.body.data_inseminacao
+                
             }
-            if (req.body.id.length == 0){
-                modelInseminacao.create(novoInseminacao)
-                .then( function(item){
-					req.flash('success_msg', 'Cadastrado com sucesso!!!')
+            
+            // Se algum brinco_old estiver vazio, então o usuário está CADASTRANDO inseminacao
+            if (novoInseminacao.brinco_femea_old==='' ){
+                novoInseminacao.brinco_femea_old= req.body.brinco_femea,
+				novoInseminacao.brinco_macho_old= req.body.brinco_macho,
+                novoInseminacao.data_inseminacao_old= req.body.data_inseminacao
+            }
+			Banco.execute(
+				"INSERT INTO `inseminacao` (brinco_femea, brinco_macho, data_inseminacao) \
+					VALUES (?,?,?) \
+					ON DUPLICATE KEY UPDATE \
+                        brinco_femea=?, \
+						brinco_macho=?, \
+						data_inseminacao=?",
+						
+				[novoInseminacao.brinco_femea_old,novoInseminacao.brinco_macho_old,novoInseminacao.data_inseminacao_old, 
+				 novoInseminacao.brinco_femea,novoInseminacao.brinco_macho,novoInseminacao.data_inseminacao],
+
+				function(err, inseminacao, fields) {
+					if(!err){
+						req.flash('success_msg', 'Dados salvos com sucesso!!!')
+						res.redirect('/Inseminacao/listarInseminacao')					
+					}else{
+						console.log("Erro: ", err);
+						req.flash('error_msg', 'Erro. Não foi possível salvar os dados!!!')
+						res.redirect('/Inseminacao/listarInseminacao')
+					}
+				}
+			);
+		}
+	}
+	
+    formAltInseminacao ( req , res ){	
+        
+        req.params.data_inseminacao=req.params.data_inseminacao.replace(/-/g,'/')
+
+		Banco.execute(
+			'SELECT \
+                brinco_femea, \
+				brinco_macho,\
+				DATE_FORMAT(data_inseminacao,"%Y-%m-%d") as data_inseminacao\
+			FROM `inseminacao`\
+            WHERE brinco_femea=? and\
+                  brinco_macho=? and\
+                  data_inseminacao=?',
+
+            [req.params.brinco_femea,req.params.brinco_macho,req.params.data_inseminacao],
+            
+			function(err, inseminacao, fields) {
+				if(!err){
+		
+					// TRATAR CASO QUANDO O SELECT RETORNAR VAZIO
+
+					res.render('Inseminacao/formAddAltInseminacao', {Inseminacao: inseminacao[0]})
+				}
+				else{
+					console.log("Erro: ", err);
+					req.flash('error_msg', 'Erro na montagem do Formulário de Alteração de Dados do Inseminacao!!!')
 					res.redirect('/Inseminacao/listarInseminacao')
-				})
-                .catch( (erro) => {
-                    req.flash('error_msg', 'Erro!!! Não foi possível cadastrar. '+erro)
-                    res.redirect('/Inseminacao/listarInseminacao')
-                })
-			}else{ 
-                modelInseminacao.update(novoInseminacao,
-                    {where: {id:req.body.id}})
-                .then( function(){
-                    req.flash('success_msg', 'Alterado com sucesso!!!')
-                    res.redirect('/Inseminacao/listarInseminacao')
-                })
-                .catch( function(erro){
-                    req.flash('error_msg', 'Erro!!! Não foi possível alterar. ' + erro)
-                    res.redirect('/Inseminacao/listarInseminacao')
-                })
-            }
-        }
-    }
-	
+				}
+			}
+		);
+    }	
+		
 	excInseminacao(req, res){
-        modelInseminacao.destroy({where: {'id' : req.params.id}})
-        .then( function(){
-            req.flash('success_msg', 'Exclusão efetuada com sucesso!!!')
-            res.redirect('/Inseminacao/listarInseminacao')
-            })
-        .catch( function(erro){
-            req.flash('error_msg', 'Erro!!! Não foi possível excluir. '+erro)
-            res.redirect('/Inseminacao/listarInseminacao')
-        })  
+        console.log(req.params)
+		Banco.execute(
+            'DELETE FROM `inseminacao` WHERE brinco_femea=? and\
+                                             brinco_macho=? and\
+                                             data_inseminacao=?',
+  
+            [req.params.brinco_femea,req.params.brinco_macho,req.params.data_inseminacao],
+            
+			function(err, inseminacao, fields) {
+				if(!err){
+					req.flash('success_msg', 'Deletado com sucesso!!!')
+					res.redirect('/Inseminacao/listarInseminacao')
+				}
+				else{
+					console.log("Erro: ", err);
+					req.flash('error_msg', 'Erro na exclusão. Inseminacao não excluido.')
+					res.redirect('/Inseminacao/listarInseminacao')
+				}
+			}
+		);
     }
-	
 }
+
 module.exports = new InseminacaoController()

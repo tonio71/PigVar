@@ -5,7 +5,6 @@
 const express = require("express")
 const router = express.Router()
 
-
 const InseminacaoController = require ('../controllers/InseminacaoController')
 
 //const {eAdmin, eVender} = require("../helpers/eAdmin")
@@ -20,13 +19,13 @@ router.get('/listarInseminacao',  InseminacaoController.tabelaInseminacao)
 // FORMULÁRIO PARA CADASTRAR UM NOVO Inseminacao
 router.get('/formAddAltInseminacao', InseminacaoController.formCadInseminacao)
 
-// FORMULÁRIO PARA ALTERAR Inseminacao PELO NÚMERO DO BRINCO
-router.get('/formAddAltInseminacao/:brinco_m/:brinco_f/:data', InseminacaoController.formAltInseminacao)
+// FORMULÁRIO PARA ALTERAR Inseminacao
+router.get('/formAddAltInseminacao/:brinco_femea/:brinco_macho/:data_inseminacao', InseminacaoController.formAltInseminacao)
 
-
-// OPERAÇÃO PARA CADASTRAR E ALTERAR Inseminacao PELO NÚMERO DO BRINCO
+// OPERAÇÃO PARA CADASTRAR E ALTERAR Inseminacao
 router.post('/addAltInseminacao', InseminacaoController.addAltInseminacao)
 
-router.get('/excInseminacao/:brinco_m/:brinco_f/:data', InseminacaoController.excInseminacao)
+// OPERAÇÃO PARA EXCLUIR Inseminacao PELO NÚMERO DO BRINCO
+router.get('/excInseminacao/:brinco_femea/:brinco_macho/:data_inseminacao', InseminacaoController.excInseminacao)
 
 module.exports = router
