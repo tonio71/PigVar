@@ -1,9 +1,3 @@
-//APAGAR MODELS/ASSOCIATIONS.JS
-//ALTERAR O BD PARA SE CONECTAR COM O MYSQL
-//ALTERAR OS MODELOS DAS ENTIDADES
-//ALTERAR OS CONTROLLERS PARA REALIZAR AS OPERACOES
-
-// Carregando módulos
 const express = require ('express')
 const servidor = express()
 const handlebars = require ('express-handlebars')
@@ -16,11 +10,9 @@ const reprodutor = require('./models/Reprodutor')
 //const passport = require('passport')
 //require ('./config/auth')(passport)
 
-//exemplo: const ##Entidade##Route = require ('./routes/##Entidade##Route')
 const ReprodutorRoutes = require ('./routes/ReprodutorRoutes') 
 const InseminacaoRoutes = require ('./routes/InseminacaoRoutes') 
-//const PartoRoute = require ('./routes/PartoRoutes') 
-//##REQROUTES##
+const PartoRoutes = require ('./routes/PartoRoutes') 
 
 //Configurações
 
@@ -59,7 +51,7 @@ const InseminacaoRoutes = require ('./routes/InseminacaoRoutes')
     //Rotas
         servidor.use('/Reprodutor', ReprodutorRoutes)
 		servidor.use('/Inseminacao', InseminacaoRoutes) 
-		//servidor.use('/Parto', PartoRoutes) 
+		servidor.use('/Parto', PartoRoutes) 
 		//##INSERIR_ROTAS##
     
     //Inicia Servidor

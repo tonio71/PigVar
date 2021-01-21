@@ -1,7 +1,3 @@
-//
-// Template para criação de controller de Entidades
-//
-
 const Banco = require ('../models/BD')
 const mysql = require('mysql2')
 
@@ -19,7 +15,6 @@ class InseminacaoController {
 			function(err, inseminacoes, fields) {
 				if(!err){               
                     for (var i = 0; i < inseminacoes.length; i++) {
-                        //inseminacoes[i].data_inseminacaoLink = (inseminacoes[i].data_inseminacao).replace(/\//g,'-')
                         inseminacoes[i].data_inseminacaoLink = 
                                 (inseminacoes[i].data_inseminacao).substr(6, 4)+'-'
                                 + (inseminacoes[i].data_inseminacao).substr(3, 2)+'-'

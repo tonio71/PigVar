@@ -4,24 +4,51 @@
   
 {{/each}}
 
-<h3> Editar Parto</h3>
+<h3> Parto </h3>
 
   <div class="card">
     <div class="card-body">
-          <form action="/Parto/addAltParto" method='POST'>
-              <p> 
+      <form action="/Parto/addAltParto" method='POST'>
+      
+      {{#if Parto}}
+        <label for='brinco_femea'> Brinco da Fêmea: </label>
+          <input readonly type='text' id='brinco_femea' name='brinco_femea' value= '{{Parto.brinco_femea}}' class='form-control'>
+      {{else}}
+        <label for='brinco_femea'> Brinco da Fêmea: </label>
+          <input type='text' id='brinco_femea' name='brinco_femea' value= '{{Parto.brinco_femea}}' maxlength="7" title="Campo não pode ser vazio nem maior que 7 caracteres." class='form-control'>
+      {{/if}}
 
-              <input type='hidden' id='id' name='id' value="{{Parto.id}}">
+      <label for='data_parto'> Data de Nascimento: </label>
+        <input type='date' id='	data_parto' name='data_parto' value= '{{Parto.data_parto}}' class='form-control'> 
+      <label for='ordem_paricao'> Ordem de parição: </label>
+        <input type='text' id='ordem_paricao' name='ordem_paricao' value= '{{Parto.ordem_paricao}}' class='form-control'> 
+      <label for='galpao'> Galpão: </label>
+        <input type='text' id='galpao' name='galpao' value= '{{Parto.galpao}}' maxlength="20" title="Campo não pode ser maior que 5 caracteres." class='form-control'>      
+      <label for='sala_maternidade'> Sala de maternidade: </label>
+        <input type='text' id='sala_maternidade' name='sala_maternidade' value= '{{Parto.sala_maternidade}}' maxlength="20" title="Campo não pode ser maior que 5 caracteres." class='form-control'>            
+      <label for='peso_matriz_pre_parto'> Peso da matriz pré parto: </label>
+        <input type='number' id='peso_matriz_pre_parto' name='peso_matriz_pre_parto' value= '{{Parto.peso_matriz_pre_parto}}' min=0 max=999.999 step=0.001 title="Utilize '.' para decimal. Valores permitidos entre 0 e 999.999" class='form-control'> 
+      <label for='peso_matriz_pos_parto'> Peso da matriz pós parto: </label>
+        <input type='number' id='peso_matriz_pos_parto' name='peso_matriz_pos_parto' value= '{{Parto.peso_matriz_pos_parto}}' min=0 max=999.999 step=0.001 title="Utilize '.' para decimal. Valores permitidos entre 0 e 999.999" class='form-control'> 
 
-              <label for='nome'> Nome: </label>
-                  <input type='text' id='nome' name='nome' value= '{{Parto.nome}}' class='form-control'>
+      <label for='peso_nasc1'> Peso do nascido 1: </label>
+        <input type='number' id='peso_nasc1' name='peso_nasc1' value= '{{Parto.peso_nasc1}}' min=0 max=999.999 step=0.001 title="Utilize '.' para decimal. Valores permitidos entre 0 e 999.999" class='form-control'> 
+      <label for='estado_nasc1'> Estado do nascido 1: </label>
+        <input type='text' id='estado_nasc1' name='estado_nasc1' value= '{{Parto.estado_nasc1}}' maxlength=1 pattern="[1-3]{1}" title="Digite: 1 para Vivo, 2 para Nati-morto ou 3 para Mumificado" class='form-control'>  
+      <label for='peso_nasc1'> Peso ao desmame do nascido 1: </label>
+        <input type='number' id='peso_desmame1' name='peso_desmame1' value= '{{Parto.peso_desmame1}}' min=0 max=999.999 step=0.001 title="Utilize '.' para decimal. Valores permitidos entre 0 e 999.999" class='form-control'> 
 
-              <label for='slug'> Slug: </label>
-                  <input type='text' id='slug' name='slug' value= '{{Parto.slug}}' class='form-control'> 
+      <label for='peso_nasc2'> Peso do nascido 2: </label>
+        <input type='number' id='peso_nasc2' name='peso_nasc2' value= '{{Parto.peso_nasc2}}' min=0 max=999.999 step=0.001 title="Utilize '.' para decimal. Valores permitidos entre 0 e 999.999" class='form-control'> 
+      <label for='estado_nasc2'> Estado do nascido 1: </label>
+        <input type='text' id='estado_nasc2' name='estado_nasc2' value= '{{Parto.estado_nasc2}}' maxlength=1 pattern="[1-3]{1}" title="Digite: 1 para Vivo, 2 para Nati-morto ou 3 para Mumificado" class='form-control'>  
+      <label for='peso_nasc2'> Peso ao desmame do nascido 2: </label>
+        <input type='number' id='peso_desmame2' name='peso_desmame2' value= '{{Parto.peso_desmame2}}' min=0 max=999.999 step=0.001 title="Utilize '.' para decimal. Valores permitidos entre 0 e 999.999" class='form-control'> 
+               
+      <br>
+      <button type='submit' class='btn btn-success'>Salvar Parto</button>
+      <button type='reset' class='btn btn-success'>Limpar Dados</button>
 
-              <br>
-              <button type='submit' class='btn btn-success'>Salvar Parto</button>
-
-          </form>
+    </form>
     </div>  
   </div>

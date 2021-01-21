@@ -1,7 +1,3 @@
-//
-// Template para criação de controller de Entidades
-//
-
 const Banco = require ('../models/BD')
 const mysql = require('mysql2')
 

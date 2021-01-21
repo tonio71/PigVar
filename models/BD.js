@@ -21,9 +21,4 @@ else{
 	console.log("BD conectado")
 }
 	
-	
 module.exports = bd
-
-
-
-

@@ -1,14 +1,29 @@
 const Banco = require ('./BD')
+const mysql = require('mysql2');
 
 	//modelos
+
+	/*
+		brinco_femea
+		data_parto
+		ordem_paricao
+        galpao
+	    sala_maternidade
+		peso_matriz_pre_parto
+		peso_matriz_pos_parto
+
+		peso_nasc1
+		estado_nasc1
+		peso_desmame1
+
 	var Parto = Banco.bd.define('Parto',{
 		brinco_femea: {type: Banco.Sequelize.STRING(7), allowNull: false},
+		data_parto: {type: Banco.Sequelize.DATE, allowNull:false},
+		ordem_paricao: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true},
         galpao: {type: Banco.Sequelize.STRING(5), allowNull: true},
 	    sala_maternidade: {type: Banco.Sequelize.STRING(5), allowNull: true},
-        data_parto: {type: Banco.Sequelize.DATE, allowNull:false},
 		peso_matriz_pre_parto: {type: Banco.Sequelize.REAL, allowNull: true},
 		peso_matriz_pos_parto: {type: Banco.Sequelize.REAL, allowNull: true},
-		ordem_paricao: { type: DataTypes.INTEGER, allowNull: false, autoIncrement: true},
 		
 		// DADOS DO LEITAO
 		peso_nasc1: {type: Banco.Sequelize.REAL, allowNull: false},
@@ -154,6 +169,6 @@ const Banco = require ('./BD')
 		peso_nasc36: {type: Banco.Sequelize.REAL, allowNull: false},
 		estado_nasc36: {type: Banco.Sequelize.STRING(1), allowNull: false},
 		peso_desmame36: {type: Banco.Sequelize.REAL, allowNull: true}	
-    })
+    })*/
 
-    module.exports = Parto
+   // module.exports = Parto
