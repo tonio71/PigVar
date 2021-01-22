@@ -1,5 +1,6 @@
 const Banco = require ('../models/BD')
 const mysql = require('mysql2')
+const Reprodutor =require('../models/Reprodutor')
 
 class ReprodutorController {
 
@@ -35,9 +36,8 @@ class ReprodutorController {
     }
 
 	addAltReprodutor = ( req , res ) => {
-		var erros = []
-		// Escrever código para validação
-		// var erros = ValidaçãoReprodutor(req)
+		var reprodutor = new Reprodutor()
+		var erros = reprodutor.validar(req.body) 
        
         if(erros.length > 0){
             res.render('Reprodutor/formAddAltReprodutor', {Reprodutor:req.body, erros : erros})
@@ -102,7 +102,14 @@ class ReprodutorController {
 				if(!err){
 		
 					// TRATAR CASO QUANDO O SELECT RETORNAR VAZIO
-
+					if(reprodutor[0].sexo=="F"){
+						console.log('femea Verdadeiro', reprodutor[0].sexo)
+						reprodutor[0].ehFemea=true
+					}
+					else{
+						console.log('machoo Verdadeiro', reprodutor[0].sexo)
+						reprodutor[0].ehFemea=false
+					}
 					res.render('Reprodutor/formAddAltReprodutor', {Reprodutor: reprodutor[0]})
 				}
 				else{
