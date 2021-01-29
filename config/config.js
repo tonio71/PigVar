@@ -10,6 +10,7 @@ module.exports = {
 			//dados para pool de até 10 conexoes
 			waitForConnections: true,
 			connectionLimit: 10,
-			queueLimit: 0
+            queueLimit: 0,
+
     }
 }

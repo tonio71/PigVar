@@ -1,18 +1,21 @@
 const Banco = require ('../models/BD')
 const mysql = require('mysql2')
+const Inseminacao =require('../models/Inseminacao')
+const Reprodutor =require('../models/Reprodutor')
 
 class InseminacaoController {
 
-	tabelaInseminacao(req,res){
-		Banco.execute(
+	async tabelaInseminacao(req,res){
+		console.log('cd a tabela????')
+		var [inseminacoes,fields]= await Banco.execute(
 			'SELECT \
 				brinco_femea, \
 				brinco_macho,\
 				DATE_FORMAT(data_inseminacao,"%d/%m/%Y") as data_inseminacao \
 			FROM `inseminacao`',
             [],
-            
 			function(err, inseminacoes, fields) {
+				console.log("inseminacoe :xxxxxxx ");
 				if(!err){               
                     for (var i = 0; i < inseminacoes.length; i++) {
                         inseminacoes[i].data_inseminacaoLink = 
@@ -20,7 +23,8 @@ class InseminacaoController {
                                 + (inseminacoes[i].data_inseminacao).substr(3, 2)+'-'
                                 + (inseminacoes[i].data_inseminacao).substr(0, 2)
                     } 
-                    res.render('Inseminacao/tabelaInseminacao', {inseminacoes: inseminacoes})
+					res.render('Inseminacao/tabelaInseminacao', {inseminacoes: inseminacoes})
+					console.log('xxxxxxxxxxx??? inseminacoes ', inseminacoes)
 				}
 				else{
 					console.log("Erro: ", err);
@@ -28,17 +32,19 @@ class InseminacaoController {
 					res.redirect('/')
 				}
 			}
-		);	
+		);
     }
 
     formCadInseminacao ( req , res ){
-		res.render('Inseminacao/formAddAltInseminacao')
+		var reprodutor = new Reprodutor()
+		var brincoFemeas = reprodutor.getBrincoFemeas()
+		console.log('brincos de feeeee', brincoFemeas[0])
+		res.render('Inseminacao/formAddAltInseminacao', {brincoFemeas: brincoFemeas})
     }
 
 	addAltInseminacao = ( req , res ) => {
-		var erros = []
-		// Escrever código para validação
-		// var erros = ValidaçãoInseminacao(req)
+		var inseminacao = new Inseminacao()
+		var erros = inseminacao.validar(req.body)
        
         if(erros.length > 0){
             res.render('Inseminacao/formAddAltInseminacao', {Inseminacao:req.body, erros : erros})
@@ -86,9 +92,7 @@ class InseminacaoController {
 	}
 	
     formAltInseminacao ( req , res ){	
-        
         req.params.data_inseminacao=req.params.data_inseminacao.replace(/-/g,'/')
-
 		Banco.execute(
 			'SELECT \
                 brinco_femea, \
@@ -98,14 +102,9 @@ class InseminacaoController {
             WHERE brinco_femea=? and\
                   brinco_macho=? and\
                   data_inseminacao=?',
-
             [req.params.brinco_femea,req.params.brinco_macho,req.params.data_inseminacao],
-            
-			function(err, inseminacao, fields) {
-				if(!err){
-		
-					// TRATAR CASO QUANDO O SELECT RETORNAR VAZIO
-
+            function(err, inseminacao, fields) {
+				if(!err){// TRATAR CASO QUANDO O SELECT RETORNAR VAZIO
 					res.render('Inseminacao/formAddAltInseminacao', {Inseminacao: inseminacao[0]})
 				}
 				else{
@@ -123,10 +122,8 @@ class InseminacaoController {
             'DELETE FROM `inseminacao` WHERE brinco_femea=? and\
                                              brinco_macho=? and\
                                              data_inseminacao=?',
-  
             [req.params.brinco_femea,req.params.brinco_macho,req.params.data_inseminacao],
-            
-			function(err, inseminacao, fields) {
+            function(err, inseminacao, fields) {
 				if(!err){
 					req.flash('success_msg', 'Deletado com sucesso!!!')
 					res.redirect('/Inseminacao/listarInseminacao')

@@ -11,16 +11,22 @@
     <form action="/Inseminacao/addAltInseminacao" method='POST'>
      
       <label for='brinco_femea'> Brinco da fêmea: </label>
-          <input type='hidden' id='brinco_femea' name='brinco_femea_old' value= '{{Inseminacao.brinco_femea}}' class='form-control'>
-          <input type='text' id='brinco_femea' name='brinco_femea' value= '{{Inseminacao.brinco_femea}}' class='form-control'>
+        <input type='hidden' id='brinco_femea' name='brinco_femea_old' value= '{{Inseminacao.brinco_femea}}' class='form-control'>
+
+        <input list="brinco_femea1" name="brinco_femea1">
+            <datalist id="brinco_femea1">
+              {{#each brincoFemeas}}
+                <option value="{{brinco}}">
+              {{/each}}
+            </datalist>
 
       <label for='brinco_macho'> Brinco do macho: </label>   
           <input type='hidden' id='brinco_macho' name='brinco_macho_old' value= '{{Inseminacao.brinco_macho}}' class='form-control'>
-          <input type='text' id='brinco_macho' name='brinco_macho' value= '{{Inseminacao.brinco_macho}}' class='form-control'>
+          <input type='text' id='brinco_macho' name='brinco_macho' value= '{{Inseminacao.brinco_macho}}' maxlength="7" title="Campo não pode ser vazio nem maior que 7 caracteres." class='form-control'>
 
-      <label for='data_inseminacao'> Data da Inseminação: </label>   
+      <label for='data_inseminacaodata_inseminacao'> Data da Inseminação: </label>   
           <input type='hidden' id='data_inseminacao' name='data_inseminacao_old' value= '{{Inseminacao.data_inseminacao}}' class='form-control'>
-          <input type='date' id='data_inseminacao' name='data_inseminacao' value= '{{Inseminacao.data_inseminacao}}' class='form-control'> 
+          <input type='date' id='data_inseminacao' name='data_inseminacao' value= '{{Inseminacao.data_inseminacao}}' title="Campo não pode ser vazio" class='form-control'> 
           
       <br>
       <button type='submit' class='btn btn-success'>Salvar Inseminação</button>

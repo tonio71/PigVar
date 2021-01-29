@@ -103,11 +103,9 @@ class ReprodutorController {
 		
 					// TRATAR CASO QUANDO O SELECT RETORNAR VAZIO
 					if(reprodutor[0].sexo=="F"){
-						console.log('femea Verdadeiro', reprodutor[0].sexo)
 						reprodutor[0].ehFemea=true
 					}
 					else{
-						console.log('machoo Verdadeiro', reprodutor[0].sexo)
 						reprodutor[0].ehFemea=false
 					}
 					res.render('Reprodutor/formAddAltReprodutor', {Reprodutor: reprodutor[0]})

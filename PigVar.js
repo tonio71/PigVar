@@ -1,4 +1,3 @@
-// ANTONIO MARIA PEREIRA DE RESENDE
 const express = require ('express')
 const servidor = express()
 const handlebars = require ('express-handlebars')
