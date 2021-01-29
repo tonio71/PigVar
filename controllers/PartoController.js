@@ -1,5 +1,6 @@
 const Banco = require ('../models/BD')
 const mysql = require('mysql2')
+const Parto = require('../models/Parto')
 
 class PartoController {
 
@@ -35,15 +36,13 @@ class PartoController {
     }
 
     formCadParto ( req , res ){
-		console.log('cade o form pato????')
 		res.render('Parto/formAddAltParto')
     }
 
 	addAltParto = ( req , res ) => {
 		var erros = []
-		// Escrever código para validação
-		// var erros = ValidaçãoParto(req)
-       
+		var parto = new Parto()
+		var erros = parto.validar(req.body)
         if(erros.length > 0){
             res.render('Parto/formAddAltParto', {Parto:req.body, erros : erros})
         }
@@ -56,7 +55,6 @@ class PartoController {
 				sala_maternidade: req.body.sala_maternidade,
 				peso_matriz_pre_parto: parseFloat(req.body.peso_matriz_pre_parto),
 				peso_matriz_pos_parto: parseFloat(req.body.peso_matriz_pos_parto)
-
 			}
 			// Inserindo novos campos Peso Estado e Desmame na estrutura novoPartos
 			for(var i=1; i<=36;i++){
@@ -90,10 +88,6 @@ class PartoController {
 			}
 			sql = sql + campos
 			
-			
-
-			console.log(sql)
-			console.log(novoParto)
 			Banco.execute(
 				sql,
 				[novoParto.brinco_femea, novoParto.data_parto, novoParto.ordem_paricao, novoParto.galpao, novoParto.sala_maternidade, novoParto.peso_matriz_pre_parto, novoParto.peso_matriz_pos_parto,
@@ -121,10 +115,8 @@ class PartoController {
             campos=campos+ ', peso_nasc'+i+', estado_nasc'+i+', peso_desmame'+i
         }
         sql=sql+campos+' FROM `Parto` WHERE brinco_femea=? AND ordem_paricao=?'
-		console.log(sql)
 		Banco.execute(
 			sql,
-
 			[req.params.brinco_femea, req.params.ordem_paricao],
 			function(err, parto, fields) {
 				if(!err){
