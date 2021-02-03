@@ -1,6 +1,3 @@
-const Banco = require ('../models/BD')
-const mysql = require('mysql2')
-
 class Reprodutor {
     constructor(){
         this.erros= []
@@ -58,24 +55,6 @@ class Reprodutor {
         if(reprodutor.sexo.length>1){
             (this.erros).push({texto: "Sexo pode ter no máximo 1 caracter"})
         }
-    }
-
-    getBrincoFemeas(){
-        Banco.execute(
-			'SELECT \
-				brinco \
-			 FROM `reprodutor` where sexo="F" ',
-			[],
-			function(err, brincoFemeas, fields) {
-				if(!err){
-                    return brincoFemeas
-				}
-				else{
-                    console.log("Erro na consulta das fêmeas: ", err)
-                    return null
-				}
-            }
-        );    
     }
 }
 

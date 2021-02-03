@@ -1,6 +1,3 @@
-const Banco = require ('../models/BD')
-const mysql = require('mysql2')
-
 class Parto {
     constructor(){
         this.erros= []

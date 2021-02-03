@@ -1,4 +1,4 @@
-const Banco = require ('../models/BD')
+const Banco = require ('../persistence/BD')
 const mysql = require('mysql2')
 const Parto = require('../models/Parto')
 
