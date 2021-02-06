@@ -43,7 +43,6 @@ class ReprodutorDAO {
         return reprodutores
       }
       catch(erro){
-        console.log("jogando erro no try do DAO")
         throw erro;
       }
     }

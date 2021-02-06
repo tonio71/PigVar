@@ -27,7 +27,7 @@ class BD{
         let pro = new Promise((resolve,reject) => {
             let query = queryToDo;
             this.db.query(query, function (erro, result) {
-                if (erro){ console.log('jogando erro dentr do BD') 
+                if (erro){ 
                   throw erro;
                 }else{ 
                   resolve(result);
@@ -40,6 +40,7 @@ class BD{
     async doQueryParams(queryToDo, array) {
       let pro = new Promise((resolve,reject) => {
         let query = queryToDo;
+        console.log('qqqqqqqqqqqqqq',query)
         this.db.query(query, array, function (erro, result) {
             if (erro) throw erro;
             resolve(result);
