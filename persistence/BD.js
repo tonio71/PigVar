@@ -40,7 +40,8 @@ class BD{
     async doQueryParams(queryToDo, array) {
       let pro = new Promise((resolve,reject) => {
         let query = queryToDo;
-        console.log('qqqqqqqqqqqqqq',query)
+        console.log('query....',query)
+
         this.db.query(query, array, function (erro, result) {
             if (erro) throw erro;
             resolve(result);

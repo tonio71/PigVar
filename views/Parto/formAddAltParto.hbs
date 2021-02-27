@@ -8,20 +8,35 @@
 
   <div class="card">
     <div class="card-body">
-      <form action="/Parto/addAltParto" method='POST'>
-      
-      {{#if Parto}}
-        <label for='brinco_femea'> Brinco da Fêmea: </label>
-          <input readonly type='text' id='brinco_femea' name='brinco_femea' value= '{{Parto.brinco_femea}}' class='form-control'>
+      <form action="/Parto/addAltParto" method='POST'autocomplete='off'>
+       {{#if Parto}}
+          <input type='hidden' id='brinco_femea' name='brinco_femea_old' value= '{{Parto.brinco_femea}}'  class='form-controls'>
+          <label for='brinco_femea'> Brinco da fêmea:</label>
+            <input list="listabrinco_femea" name="brinco_femea" value= '{{Parto.brinco_femea}}' class='form-control'>
+                <datalist id="listabrinco_femea">
+                  {{#each brincoFemeas}}
+                    <option value="{{brinco}}">
+                  {{/each}}
+                </datalist>
+            <br>
       {{else}}
-        <label for='brinco_femea'> Brinco da Fêmea: </label>
-          <input type='text' id='brinco_femea' name='brinco_femea' value= '{{Parto.brinco_femea}}' maxlength="7" title="Campo não pode ser vazio nem maior que 7 caracteres." class='form-control'>
-      {{/if}}
+          <input type='hidden' id='brinco_femea' name='brinco_femea_old' value= ''  class='form-controls'>
+          <label for='brinco_femea'> Brinco da fêmea: </label>
+            <input list="listabrinco_femea" name="brinco_femea" class='form-control'>
+                <datalist id="listabrinco_femea">
+                  {{#each brincoFemeas}}
+                    <option value="{{brinco}}">
+                  {{/each}}
+                </datalist>
+      {{/if}} 
 
+      <input type='hidden' id='data_parto_old' name='data_parto_old' value= '{{Parto.data_parto}}' class='form-control'> 
       <label for='data_parto'> Data de Nascimento: </label>
         <input type='date' id='	data_parto' name='data_parto' value= '{{Parto.data_parto}}' class='form-control'> 
-      <label for='ordem_paricao'> Ordem de parição: </label>
-        <input type='text' id='ordem_paricao' name='ordem_paricao' value= '{{Parto.ordem_paricao}}' class='form-control'> 
+      
+      <!-- campo ID para identificar registro -->
+      <input type='hidden' id='id' name='id' value= '{{Parto.id}}' >
+
       <label for='galpao'> Galpão: </label>
         <input type='text' id='galpao' name='galpao' value= '{{Parto.galpao}}' maxlength="20" title="Campo não pode ser maior que 5 caracteres." class='form-control'>      
       <label for='sala_maternidade'> Sala de maternidade: </label>

@@ -1,9 +1,7 @@
 const Reprodutor =require('../models/Reprodutor')
 const ReprodutorDAO = require ('../persistence/ReprodutorDAO')
 
-
 class ReprodutorController {
-
 	async tabelaReprodutor(req,res){
 		var reprodutorDAO = new ReprodutorDAO()
 		try{ 

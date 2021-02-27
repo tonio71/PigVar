@@ -1,10 +1,7 @@
-const Banco = require ('../persistence/BD')
-const mysql = require('mysql2')
 const Inseminacao =require('../models/Inseminacao')
 const InseminacaoDAO = require ('../persistence/InseminacaoDAO')
 const Reprodutor =require('../models/Reprodutor')
 const ReprodutorDAO = require ('../persistence/ReprodutorDAO')
-
 
 class InseminacaoController { 
 

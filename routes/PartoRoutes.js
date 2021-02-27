@@ -13,16 +13,15 @@ router.get('/',  PartoController.tabelaParto)
 router.get('/listarParto',  PartoController.tabelaParto)
 
 // FORMULÁRIO PARA CADASTRAR UM NOVO Parto
-router.get('/formAddAltParto', PartoController.formCadParto)
+router.get('/formAddAltParto', PartoController.formCadParto) 
 
 // FORMULÁRIO PARA ALTERAR Parto PELO NÚMERO DO BRINCO
-router.get('/formAddAltParto/:brinco_femea/:ordem_paricao', PartoController.formAltParto)
-
+router.get('/formAddAltParto/:id', PartoController.formAltParto)
 
 // OPERAÇÃO PARA CADASTRAR E ALTERAR Parto PELO NÚMERO DO BRINCO
 router.post('/addAltParto', PartoController.addAltParto)
 
 // OPERAÇÃO PARA EXCLUIR Parto PELO NÚMERO DO BRINCO
-router.get('/excParto/:brinco_femea/:ordem_paricao', PartoController.excParto)
+router.get('/excParto/:id', PartoController.excParto)
 
 module.exports = router

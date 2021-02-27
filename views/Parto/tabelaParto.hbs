@@ -16,8 +16,8 @@
             <thead>
                 <tr>
                     <th>Brinco da fêmea</th>
-                    <th>Data do parto</th>
                     <th>Ordem de parição</th>
+                    <th>Data do parto</th>
                     <th>Galpão</th>
                     <th>Sala de maternidade</th>
                     <th>Peso da matriz pré parto</th>
@@ -39,8 +39,8 @@
                 {{#each partos}}
                     <tr class="parto">
                         <td class="info-brinco-femea">{{brinco_femea}}</td>
-                        <td class="info-data_parto">{{data_parto}}</td>
-                        <td class="info-ordem_paricao">{{ordem_paricao}}</td>
+                        <td class="info-ordem_paricao">{{ordem_paricao}}</td> 
+                        <td class="info-data_parto">{{data_partoFormatado}}</td>
                         <td class="info-galpao">{{galpao}}</td>
                         <td class="info-sala_maternidade">{{sala_maternidade}}</td>
                         <td class="info-peso_matriz_pre_parto">{{peso_matriz_pre_parto}}</td>
@@ -55,9 +55,9 @@
                         <td class="info-peso_desmame2">{{peso_desmame2}}</td>
  
                         <td class="info-operacoes">
-                        <a href ='/Parto/formAddAltParto/{{brinco_femea}}/{{ordem_paricao}}'>
+                        <a href ='/Parto/formAddAltParto/{{id}}'>
                             <button class='btn btn-success mt-3'> Alterar </button> </a>
-                        <a href ='/Parto/excParto/{{brinco_femea}}/{{ordem_paricao}}'> 
+                        <a href ='/Parto/excParto/{{id}}'> 
                             <button class='btn btn-danger mt-3'> Deletar </button> </a>
                         </td>
                     </tr>		
